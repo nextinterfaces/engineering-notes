@@ -111,7 +111,7 @@ still rules today.
 ------------------------------------------------------------------------
 
 # 🎯 Summary Cheat-Sheet
-
+```
   Category       CUDA Take
   -------------- -------------------------------------------
   Pros           Fastest, mature, strong ecosystem
@@ -120,9 +120,8 @@ still rules today.
   Future         Still king, but open rivals rising
   When to Use    AI, HPC, rendering, simulations
   Alternatives   ROCm, SYCL/oneAPI, OpenCL, Vulkan Compute
-
 ------------------------------------------------------------------------
-
+```
 # 🎨 Mental Picture
 
     CUDA = Formula 1 race car (fast, expensive, specialized)
