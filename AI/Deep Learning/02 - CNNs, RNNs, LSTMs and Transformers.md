@@ -1,7 +1,4 @@
-# 🏗️ Deep Learning Architectures: CNNs, RNNs/LSTMs & Transformers  
-*Head First Kathy Sierra Style Training (Technical Edition)*  
-
----  
+# 🏗️ Deep Learning Architectures: CNNs, RNNs/LSTMs & Transformers 
 
 ## 1. Why Different Architectures?  
 
