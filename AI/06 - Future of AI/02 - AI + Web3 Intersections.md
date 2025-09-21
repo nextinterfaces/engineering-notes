@@ -21,8 +21,6 @@ Together → **intelligent + trustless systems**.
 [User Data] → [Blockchain Ledger] → [AI Training Access]  
 ```  
 
----  
-
 ### b) Provenance & Authenticity (Deepfake Defense)  
 - Blockchain can verify **who created content**.  
 - AI generates → Web3 signs & tracks origin.  
@@ -34,8 +32,6 @@ AI Model → Generates Image
 Blockchain → Signs Ownership  
 ```  
 
----  
-
 ### c) AI Agents as On-chain Actors  
 - Autonomous AI agents can **hold wallets, make payments, trade tokens**.  
 - Example: DAO with AI-powered decision making.  
@@ -44,13 +40,9 @@ Blockchain → Signs Ownership
 [LLM Agent] → [Smart Contract] → [Execute Transaction]  
 ```  
 
----  
-
 ### d) Personalized dApps  
 - Web3 dApps use AI for recommendations, chatbots, UX personalization.  
 - Example: AI assistant for DeFi trading strategies.  
-
----  
 
 ### e) Compute Marketplaces  
 - Decentralized GPU networks → rent compute for AI.  
@@ -97,7 +89,20 @@ Results stored on-chain for verification
 
 ---  
 
-## 6. Ecosystem Players 🌍  
+## 6. Comparative Table 🆚  
+
+| Aspect             | AI Only 🤖 | Web3 Only 🔗 | AI + Web3 🚀 |
+|--------------------|------------|--------------|--------------|
+| **Focus**          | Intelligence, automation | Trust, decentralization | Intelligent + trustless |
+| **Data**           | Centralized, siloed | Decentralized, owned by users | AI trained on shared, incentivized data |
+| **Ownership**      | AI company controls | User controls via tokens | Shared ownership of models + data |
+| **Transparency**   | Black-box models | Transparent ledgers | Verifiable AI provenance |
+| **Compute**        | Centralized GPU clusters | Decentralized compute nets | Shared AI compute pools |
+| **Use Cases**      | Chatbots, analytics, automation | DeFi, NFTs, DAOs | Data markets, AI agents on-chain, content provenance |  
+
+---  
+
+## 7. Ecosystem Players 🌍  
 
 - **Data**: Ocean Protocol, Fetch.ai.  
 - **Compute**: Render, Akash, Golem.  
@@ -106,7 +111,7 @@ Results stored on-chain for verification
 
 ---  
 
-## 7. Game Time 🎲  
+## 8. Game Time 🎲  
 
 Q1: How can blockchain help fight deepfakes?  
 👉 By verifying **content provenance** on-chain.  
@@ -119,11 +124,12 @@ Q3: You want an AI agent to autonomously trade crypto. What’s needed?
 
 ---  
 
-## 8. Recap 🎉  
+## 9. Recap 🎉  
 
 - AI + Web3 = intelligence + trust.  
 - Use cases: data markets, provenance, AI agents on-chain, compute sharing.  
 - Pros: trust, ownership, incentives.  
 - Cons: latency, scalability, governance.  
+- Comparative table shows why **the intersection is unique**.  
 
 ⚡ The intersection is the frontier → **AI builds intelligence, Web3 ensures trust**.  
