@@ -75,29 +75,41 @@ Result: Much lighter, cheaper, and just as smart.
 
 ## 🔌 PEFT with Adapters (2019 Breakthrough)  
 
-Think of adapters as **plug-ins** inside each Transformer block.  
-
-### How They Work:  
-- Each Transformer layer gets **2 small adapter layers** added.  
-- Adapters = small bottleneck neural networks:  
-  - Input/output size **D** (large, e.g. 1024 in BERT Large).  
-  - Tiny hidden layer **M** (small, e.g. 64).  
-- Train only the adapters, keep the rest frozen.  
+Think of **adapters** as **plug-ins or add-on modules** you insert into each Transformer block.  
+Instead of rewriting the entire model, you just **add small trainable parts** while keeping the big original model frozen.  
 
 ---
 
-### Training with Adapters  
+### 🧩 How They Work  
+
+1. **Each Transformer layer** gets **two tiny adapter layers** inserted.  
+2. An **adapter** = a *mini neural network* (a bottleneck):  
+   - Input/Output size = **D** (big, e.g. 1024 for BERT Large).  
+   - Hidden layer size = **M** (tiny, e.g. 64).  
+   - Formula for adapter parameters = **2MD + M + D** (way smaller than full model).  
+3. Only the adapters are trained — the **original Transformer weights stay frozen**.  
+
+👉 Analogy: Instead of remodeling your entire house, you just add **extension plugs** where needed.  
+
+---
+
+### 🔄 Training with Adapters  
 
 ```
-Forward pass → Through frozen Transformer + adapters
-Backward pass → Gradients update adapters only
-Storage → Save adapter weights only
+Forward pass   → Data flows through frozen Transformer + adapters
+Backward pass  → Gradients update only adapter weights
+Storage        → Save only adapter weights (not the whole model)
 ```
 
-Result:  
-- Transformer = 🧊 frozen solid  
-- Adapters = ✍️ updated  
-- Storage = 💾 tiny fraction of full model  
+---
+
+### 🎯 Results  
+
+- Transformer = 🧊 frozen solid (no changes to original weights)  
+- Adapters = ✍️ updated (task-specific learning happens here)  
+- Storage = 💾 tiny fraction compared to saving the full model  
+
+👉 You keep one giant model, and for each new task you just carry a **small set of adapter weights** — like packing an extra USB stick instead of hauling an entire new computer.  
 
 ---
 
@@ -122,11 +134,11 @@ Result:
 
 ## 📝 Key Takeaways  
 
-1. **Old way:** RNNs → Transformers → Transfer learning  
-2. **Problem:** Full fine-tuning = slow, costly, forgetful, huge storage  
-3. **Solution:** PEFT (Adapters = small trainable add-ons)  
-4. **Impact:** Just ~2% of params per task → near full performance  
-5. **Future:** PEFT = essential toolkit for scaling LLM fine-tuning  
+1. **RNNs → Transformers → Transfer Learning** = NLP’s evolution.  
+2. **Problem with full fine-tuning:** cost, memory, forgetting.  
+3. **PEFT (Adapters):** freeze the model, train small add-ons.  
+4. **Result:** Just ~2% of params per task with almost no performance loss.  
+5. **Analogy:** Instead of rewriting the whole book, just add **sticky notes**.  
 
 ---
 
