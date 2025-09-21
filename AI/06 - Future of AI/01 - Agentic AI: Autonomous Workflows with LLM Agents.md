@@ -85,7 +85,42 @@ r.hset("experience:1", mapping={"query": "search redis", "result": "found docs"}
 
 ---  
 
-## 6. Applications 🚀  
+## 6. Flowchart of Agent Execution Loop 🔄  
+
+```
+          ┌──────────────────┐
+          │   User Prompt     │
+          └─────────┬────────┘
+                    ↓
+          ┌──────────────────┐
+          │   Planner (LLM)   │
+          └─────────┬────────┘
+                    ↓
+          ┌──────────────────┐
+          │  Tool Selection   │───► API / DB / Function Call
+          └─────────┬────────┘
+                    ↓
+          ┌──────────────────┐
+          │   Execute Action  │
+          └─────────┬────────┘
+                    ↓
+          ┌──────────────────┐
+          │   Store in Memory │
+          └─────────┬────────┘
+                    ↓
+          ┌──────────────────┐
+          │ Reflection / Loop │───► Goal reached?  
+          └─────────┬────────┘
+                    │ Yes
+                    ↓
+          ┌──────────────────┐
+          │   Final Output    │
+          └──────────────────┘
+```  
+
+---  
+
+## 7. Applications 🚀  
 
 - **Customer support bots** (multi-turn, fetch from KB).  
 - **Research assistants** (search → summarize → generate report).  
@@ -94,7 +129,7 @@ r.hset("experience:1", mapping={"query": "search redis", "result": "found docs"}
 
 ---  
 
-## 7. Pros & Cons ⚖️  
+## 8. Pros & Cons ⚖️  
 
 ### ✅ Pros  
 - Automates repetitive workflows.  
@@ -108,7 +143,7 @@ r.hset("experience:1", mapping={"query": "search redis", "result": "found docs"}
 
 ---  
 
-## 8. Alternatives / Ecosystem 🌍  
+## 9. Alternatives / Ecosystem 🌍  
 
 - **LangChain Agents** → orchestration, tools.  
 - **AutoGPT** → autonomous task execution loops.  
@@ -117,7 +152,7 @@ r.hset("experience:1", mapping={"query": "search redis", "result": "found docs"}
 
 ---  
 
-## 9. Game Time 🎲  
+## 10. Game Time 🎲  
 
 Q1: You want an AI to **query docs + run SQL + write report**. Which component crucial?  
 👉 **Tool integration (DB, SQL executor)**.  
@@ -130,10 +165,11 @@ Q3: You want collaborative agents (marketing + sales bots). Which framework?
 
 ---  
 
-## 10. Recap 🎉  
+## 11. Recap 🎉  
 
 - Agentic AI = LLMs that **plan, reason, act**.  
 - Components = planner, tools, memory, execution loop.  
+- Flowchart helps visualize the **autonomous cycle**.  
 - Frameworks = LangChain, AutoGPT, CrewAI, Semantic Kernel.  
 - Use cases = support, research, automation.  
 
