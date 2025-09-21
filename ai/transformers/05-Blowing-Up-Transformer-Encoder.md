@@ -1,120 +1,161 @@
-# 💥 Blowing Up the Transformer Encoder  
-*"How raw words become context-packed vectors."*  
+# 💥 Blowing Up the Transformer Encoder
+*"Turning words into context-rich vectors, step by step."*  
 
 ---
 
-## 🎯 Big Picture: What the Encoder Does  
+## 🎯 The Big Goal  
 
-Input sentence: `"my name is aj"`  
-→ Encoder → Output: 4 context-aware vectors (one per token).  
+The **Encoder** takes a sentence → outputs **context-rich vectors**.  
+These vectors = “what each word means in context.”  
 
-These vectors = **meaning + context** → sent to decoder for translation.  
-
+Example:  
 ```
-Input words → Encoder → Context-rich vectors → Decoder → Translation
+Input:  "my name is aj"
+Output: 4 vectors (one per word), each 512-dim, context-aware
 ```
+
+Why context matters:  
+- “Aj” in *“my name is aj”* vs. in *“aj is programming”* → same word, different meaning in context.  
 
 ---
 
 ## 🛠 Step 1: Input Preparation  
 
-1. **Tokenization + Padding:**  
-   - Sentence chopped into tokens (or word pieces).  
-   - Padded with dummy tokens → fixed length.  
+The input sentence has to be reshaped into something the network understands.  
 
-2. **One-Hot Encoding:**  
-   - Each token → giant sparse vector.  
+### a) Tokenization + Padding  
+```
+Sentence → ["my", "name", "is", "aj"]
+```
+- Pad if needed: `["my", "name", "is", "aj", "<PAD>", "<PAD>"]` (for fixed length).  
 
-3. **Embedding:**  
-   - One-hot → 512-dim dense vector.  
-   - Learned via backprop.  
+### b) One-Hot Encoding  
+```
+"my"   = [0,0,0,1,0,0,...,0]  (vocab size ~50k)
+"name" = [0,0,1,0,0,0,...,0]
+```
+👉 Very sparse and high-dimensional.  
 
-4. **Positional Encoding:**  
-   - Add sin/cos patterns → inject word order.  
+### c) Embedding  
+```
+One-hot (50k) → Dense vector (512)
+```
+Learned matrix compresses to 512-dim vector:  
+```
+"my"   → [0.12, -0.43, ..., 0.56] (512-dim)
+"name" → [0.88,  0.01, ..., 0.33]
+```
+
+### d) Positional Encoding  
+Since Transformer = parallel (not sequential), it has no order awareness.  
+So we **add sin/cos signals** to each embedding.  
 
 ```
-Embedding (512) + Position (512) = Position-aware embedding (512)
+Word Embedding + Position Signal = Position-Aware Embedding
+```
+
+Diagram:  
+```
+my(emb) + pos(0) → vector
+name(emb) + pos(1) → vector
+is(emb) + pos(2) → vector
+aj(emb) + pos(3) → vector
 ```
 
 ---
 
 ## 🧠 Step 2: Multi-Head Self-Attention  
 
-Each token embedding → split into:  
+Each token embedding (512-dim) is split into three roles:  
 
-- Q (Query): what am I looking for?  
-- K (Key): what info do I have?  
-- V (Value): what I actually pass on.  
+- **Query (Q):** “What am I looking for?”  
+- **Key (K):** “What info do I have?”  
+- **Value (V):** “What info do I pass on?”  
 
 ```
-Token → [Q, K, V]
+Token → Q, K, V  (each 512-dim)
 ```
 
-### The Flow  
+### Attention Matrix  
+For each head:  
+```
+Attention = softmax( (Q · Kᵀ) / √d ) × V
+```
 
-1. Compute **Q·Kᵀ** → affinity between words.  
-2. Scale by √d → stabilize.  
-3. Softmax → turn into probabilities.  
-4. Multiply by V → context vectors.  
+- Q·Kᵀ = affinity between words.  
+- Scale by √d → stabilize.  
+- Softmax → convert to probabilities.  
+- Multiply by V → weighted context.  
+
+**Example:**  
+```
+Word = "name"
+Q("name") · K("my")   → 0.7  → focus on "my"
+Q("name") · K("is")   → 0.2  → less focus
+Q("name") · K("aj")   → 0.1  → small focus
+```
+👉 “name” attends mostly to “my.”  
 
 ### Multi-Head Trick  
+- 512-dim split into 8 heads (each 64-dim).  
+- Each head attends differently (syntax, long-distance, subject-object).  
+- Outputs concatenated back → 512-dim.  
 
-- 512 dims split into 8 heads → each 64-dim.  
-- Each head learns different relationships.  
-- Outputs (8 × 64) concatenated back → 512-dim vector.  
-
+Diagram:  
 ```
-Head1 + Head2 + ... + Head8 → Concatenate → 512-dim
+[Head1: 64] [Head2: 64] ... [Head8: 64] → Concatenate → 512
 ```
 
 ---
 
-## 🔗 Step 3: Add & Norm #1 (Post-Attention)  
-
-1. **Residual Connection:**  
-   - Attention output + original input (skip path).  
-   - Prevents vanishing gradients.  
-
-2. **Layer Normalization:**  
-   - Normalize activations (mean=0, std≈1).  
-   - Learnable γ, β scale/shift.  
+## 🔗 Step 3: Add & Norm #1  
 
 ```
-Output1 = LayerNorm( Attention + Input )
+Attention Output (512)
+    +
+Original Input (512)
+    ↓
+Residual Connection
+    ↓
+Layer Normalization
 ```
+
+- Residual → prevents vanishing gradients, lets info skip.  
+- LayerNorm → stabilize activations (mean=0, std≈1).  
 
 ---
 
 ## 🔧 Step 4: Feed-Forward + Add & Norm #2  
 
-1. **Feed-Forward Network (FFN):**  
-   - Linear expand (512 → 1024)  
-   - ReLU + Dropout  
-   - Compress back (1024 → 512)  
-
-2. **Residual Connection:**  
-   - FFN output + previous output.  
-
-3. **Layer Normalization:**  
-   - Normalize again.  
-
+### Feed-Forward Network (FFN)  
 ```
-Output2 = LayerNorm( FFN( Output1 ) + Output1 )
+Input (512)
+ → Expand (512 → 1024)
+ → ReLU + Dropout
+ → Compress (1024 → 512)
 ```
+👉 Learns more complex relationships beyond attention.  
+
+### Add & Norm Again  
+```
+FFN output + previous → LayerNorm
+```
+
+Keeps everything stable, helps deep stacking.  
 
 ---
 
 ## 🔄 Step 5: Stacking Layers  
 
-- One encoder block = all steps above.  
-- In practice → **12+ stacked encoders**.  
-- Each layer refines context further.  
+One encoder = all steps above.  
+Transformers use **12–24 encoder blocks stacked**.  
 
+Diagram:  
 ```
 [Input Embeddings]
      │
 ┌────▼────┐
-│ Encoder │ × 12 layers
+│ Encoder │ × 12
 └────▼────┘
      │
 [Context-rich vectors → Decoder]
@@ -124,14 +165,19 @@ Output2 = LayerNorm( FFN( Output1 ) + Output1 )
 
 ## 📝 Key Takeaways  
 
-1. **Embedding + Position** → word meaning + order.  
-2. **Multi-Head Attention** → every token attends to all others.  
-3. **Add & Norm** → stable training + skip paths.  
-4. **Feed-Forward** → non-linear mixing, then normalize again.  
-5. **Stacked Encoders** → progressively richer word representations.  
+1. **Embeddings + Position** = words with order.  
+2. **Self-Attention** = each word looks at all others.  
+3. **Multi-Head** = multiple perspectives.  
+4. **Add & Norm** = skip connections + stable training.  
+5. **FFN** = nonlinear mixing of features.  
+6. **Stacked Encoders** = deeper, richer word understanding.  
 
 ---
 
 💡 Memory Hook:  
-**Encoder = assembly line:**  
-- Embed words → Add positions → Mix context (attention) → Refine (FFN) → Repeat.  
+**Encoder = language assembly line:**  
+- Add meaning (embedding).  
+- Add order (position).  
+- Mix context (attention).  
+- Refine (FFN).  
+- Repeat (stack).  
