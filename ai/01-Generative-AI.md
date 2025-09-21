@@ -174,21 +174,3 @@ Only when they’re applied to **creation tasks**.
 3. **GenAI in ecosystem** → Subset of ML/DL.  
 4. **Application matters** → Same model may or may not count as GenAI.  
 5. **Math foundation** → P(x) vs. P(Y|X) is the big split.  
-
----
-
-## 🧪 Self-Check Questions  
-
-1. Is a sentence-completion model GenAI? Why?  
-2. How would you explain GenAI vs. “classic AI” to a non-tech audience?  
-3. When does a VAE count as GenAI?  
-4. Why don’t rule-based systems qualify?  
-
----
-
-## 🚀 Next Steps  
-
-- Dive into architectures: Transformers, GANs, VAEs.  
-- Explore real-world applications.  
-- Learn training & evaluation methods.  
-- Think about ethical challenges + limits.  
