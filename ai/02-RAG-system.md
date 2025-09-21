@@ -123,8 +123,3 @@ Advantages:
 - **Naive RAG = simple cooking recipe.**  
 - **Advanced RAG = recipe with pre-check (better ingredients) and post-check (taste test).**  
 - **Modular RAG = LEGO set of AI blocks.**
-
----
-
-👉 Question for you:  
-Would you like me to also add **mnemonics + exercises** (like “spot the hallucination” challenges) to make this even more *Head First*-style interactive?
