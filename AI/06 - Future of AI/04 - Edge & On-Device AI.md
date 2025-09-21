@@ -1,7 +1,4 @@
 # 📱 Edge & On-Device AI  
-*Head First Kathy Sierra Style Training (AI Engineer Edition)*  
-
----  
 
 ## 1. Why Edge AI?  
 
