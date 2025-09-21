@@ -1,4 +1,24 @@
-# 🧠 BERT Variants: Evolution of Transformer-based Language Models   
+# 🧠 BERT Variants: Evolution of Transformer-based Language Models  
+
+## 0. What is BERT?  
+
+**BERT = Bidirectional Encoder Representations from Transformers**.  
+Introduced by Google in **2018**, it was a landmark in NLP.  
+
+### Key Features:  
+- **Bidirectional Transformer Encoder**: looks at both left + right context simultaneously.  
+- **Pretraining Objectives**:  
+  - **Masked Language Modeling (MLM)** → predict missing words.  
+  - **Next Sentence Prediction (NSP)** → predict if sentence B follows A.  
+- **Transfer Learning**: pretrained on large corpora (Wikipedia, BooksCorpus), then fine-tuned for tasks.  
+
+### Why Revolutionary?  
+- Achieved **state-of-the-art** on GLUE, SQuAD, and many benchmarks.  
+- Sparked the transformer revolution → GPT, T5, XLNet, and all variants.  
+
+👉 BERT = **the foundation encoder model for modern NLP**.  
+
+---  
 
 ## 1. Why BERT Variants?  
 
