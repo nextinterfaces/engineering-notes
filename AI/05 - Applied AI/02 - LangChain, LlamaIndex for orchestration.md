@@ -118,7 +118,40 @@ print(qa_chain.run("What are the main points in the document?"))
 
 ---  
 
-## 6. Text Diagram  
+## 6. Cons and Pros
+
+
+### LangChain 🪢  
+
+### ✅ Pros  
+- Rich ecosystem: agents, tools, memory.  
+- Integrates with dozens of APIs (search, calculators, APIs).  
+- Large community, tutorials, plugins.  
+- Flexible workflows for multi-step reasoning.  
+
+### ❌ Cons  
+- Can become overly complex (“spaghetti chains”).  
+- Debugging agents is tricky.  
+- Performance overhead (many LLM calls).  
+- Risk of **hallucinations** if not grounded in data.  
+
+---  
+
+### LlamaIndex 📖  
+
+### ✅ Pros  
+- Excellent for connecting LLMs with **custom/private data**.  
+- Simple APIs for loading docs, building indexes, querying.  
+- Supports multiple vector DB backends.  
+- Strong focus on **retrieval-augmented generation (RAG)**.  
+
+### ❌ Cons  
+- Less general orchestration than LangChain.  
+- Some advanced features still experimental.  
+- Works best when paired with LangChain or similar orchestrator.  
+- Querying large corpora can become costly without optimization.  
+
+---  
 
 ```
 LangChain → Orchestrator (prompts, tools, memory)  
@@ -127,6 +160,16 @@ Together   → Intelligent agents grounded in your data
 ```  
 
 ---  
+## Comparative Table  
+
+| Framework      | Strengths 💪 | Weaknesses ⚠️ | Best For |
+|----------------|-------------|---------------|----------|
+| **LangChain**  | Rich ecosystem, tool/agent orchestration, flexible chains | Complexity, overhead, debugging hard | Multi-step reasoning, tool calling |
+| **LlamaIndex** | Easy doc ingestion, strong RAG, multiple vector DBs | Narrower focus, some immaturity | Private data Q&A, doc retrieval |
+| **Haystack**   | Production-ready, RAG pipelines, elasticsearch-native | Heavier, less beginner-friendly | Enterprise RAG apps |
+| **Semantic Kernel** | Lightweight, integrates with .NET, plugins | Smaller ecosystem | .NET/enterprise teams |
+| **Flowise**    | Visual builder, low-code | Less flexible for advanced use | Prototyping, demos |  
+
 
 ## 7. System Design for Web Apps 🏗️  
 
