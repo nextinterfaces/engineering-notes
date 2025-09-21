@@ -152,7 +152,18 @@ r.hset("experience:1", mapping={"query": "search redis", "result": "found docs"}
 
 ---  
 
-## 10. Game Time 🎲  
+## 10. Framework Comparison Table 🆚  
+
+| Framework        | Strengths 💪 | Weaknesses ⚠️ | Best For |
+|------------------|-------------|---------------|----------|
+| **LangChain**    | Rich ecosystem, integrates with many tools, flexible agent types | Can get complex, debugging hard | General-purpose orchestration & tool use |
+| **AutoGPT**      | Autonomous loops, long-horizon tasks, hands-free workflows | Risk of infinite loops, high cost | Research demos, experimentation |
+| **CrewAI**       | Multiple collaborating agents, role-based | Newer ecosystem, less mature | Multi-agent teamwork (sales + marketing bots) |
+| **Semantic Kernel** | Lightweight, integrates with .NET, plugin-based | Smaller ecosystem vs LangChain | Enterprise apps, .NET developers |  
+
+---  
+
+## 11. Game Time 🎲  
 
 Q1: You want an AI to **query docs + run SQL + write report**. Which component crucial?  
 👉 **Tool integration (DB, SQL executor)**.  
@@ -165,12 +176,13 @@ Q3: You want collaborative agents (marketing + sales bots). Which framework?
 
 ---  
 
-## 11. Recap 🎉  
+## 12. Recap 🎉  
 
 - Agentic AI = LLMs that **plan, reason, act**.  
 - Components = planner, tools, memory, execution loop.  
 - Flowchart helps visualize the **autonomous cycle**.  
 - Frameworks = LangChain, AutoGPT, CrewAI, Semantic Kernel.  
+- Comparison table shows strengths/weaknesses.  
 - Use cases = support, research, automation.  
 
 ⚡ The future: AI agents as **autonomous teammates** in workflows.  
