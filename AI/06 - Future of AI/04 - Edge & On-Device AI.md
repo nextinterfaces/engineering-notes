@@ -1,4 +1,7 @@
 # 📱 Edge & On-Device AI  
+*Head First Kathy Sierra Style Training (AI Engineer Edition)*  
+
+---  
 
 ## 1. Why Edge AI?  
 
@@ -88,7 +91,45 @@ output = interpreter.get_tensor(output_details[0]['index'])
 
 ---  
 
-## 8. Pros & Cons ⚖️  
+## 8. Comparison: Cloud AI vs Edge AI 🆚  
+
+| Aspect            | Cloud AI ☁️ | Edge AI 📱 |  
+|-------------------|-------------|------------|  
+| **Latency**       | Higher (network trip) | Low (local processing) |  
+| **Privacy**       | Data leaves device | Data stays local |  
+| **Cost**          | Ongoing infra & API costs | Lower cloud cost, but device optimization effort |  
+| **Scalability**   | Easy (scale servers) | Harder (deploy updates to many devices) |  
+| **Compute Power** | High (GPUs/TPUs) | Limited (mobile CPUs/NPUs) |  
+| **Offline Use**   | No (needs internet) | Yes |  
+
+---  
+
+## 9. Future Trends 🔮  
+
+1. **Federated Learning on Edge** 🤝  
+   - Models train across devices collaboratively.  
+   - User data stays local → updates shared (not raw data).  
+   - Example: Gboard keyboard suggestions.  
+
+2. **6G + Edge AI** 📡  
+   - Ultra-low-latency connectivity boosts real-time AI at the edge.  
+   - Enables AR/VR, autonomous driving with instant inference.  
+
+3. **Model Marketplaces for Devices** 🛒  
+   - Pre-trained, optimized models distributed via app stores.  
+   - Example: download “vision detection model” like an app.  
+
+4. **TinyML Expansion** 🔋  
+   - Ultra-low-power AI on microcontrollers.  
+   - AI on sensors (environment, health) powered by coin-cell batteries.  
+
+5. **Edge AI + Web3** 🔗  
+   - Decentralized compute and identity for edge devices.  
+   - Devices share AI insights securely over blockchain.  
+
+---  
+
+## 10. Pros & Cons ⚖️  
 
 ### ✅ Pros  
 - Faster inference.  
@@ -104,7 +145,7 @@ output = interpreter.get_tensor(output_details[0]['index'])
 
 ---  
 
-## 9. Game Time 🎲  
+## 11. Game Time 🎲  
 
 Q1: You want **offline speech-to-text on a smartphone**. Which approach?  
 👉 Use **on-device AI with TFLite or Core ML**.  
@@ -115,15 +156,19 @@ Q2: Your IoT sensor must run on a coin battery for months. Which technique?
 Q3: You need to deploy a vision model on iOS. Which framework?  
 👉 **Core ML**.  
 
+Q4: How can you train AI across phones without centralizing data?  
+👉 **Federated learning**.  
+
 ---  
 
-## 10. Recap 🎉  
+## 12. Recap 🎉  
 
 - **Edge AI** = AI running locally on devices.  
 - **Benefits** = fast, private, offline, cost-efficient.  
 - **Challenges** = limited resources, updates, battery.  
 - **Optimizations** = quantization, pruning, distillation.  
 - **Frameworks** = TFLite, Core ML, ONNX Mobile, PyTorch Mobile, tinyML.  
-- **Use cases** = phones, IoT, cars, wearables.  
+- **Comparison table** = Cloud AI vs Edge AI trade-offs.  
+- **Future trends** = federated learning, 6G, TinyML, model marketplaces.  
 
 ⚡ Edge AI = bringing **intelligence closer to the user**.  
