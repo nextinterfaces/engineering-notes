@@ -15,6 +15,24 @@ It lets us adapt giant pre-trained models (LLMs, diffusion models, etc.) without
 - Update **all parameters** (billions or trillions).  
 - ❌ Expensive, slow, huge memory.  
 - ❌ Risk of catastrophic forgetting.  
+```
+Big Weight  W (D×K)  ≈   A (D×R)  ×  B (R×K)      where R ≪ D, K
+# Parameters:
+#   Full: D×K
+#   Low-rank: D×R + R×K   (much smaller when R is tiny)
+```
+
+👉 We only learn A and B (small) rather than a whole D×K matrix.
+
+---
+
+## 🚧 Why Not Full Fine-Tuning (and plain Adapters)?
+
+```
+Full FT:  Update ALL weights  → 💸 cost + 💾 storage + 🧹 forgetting
+Adapters: Add bolt-on layers  → ✅ fewer params but 🚦 extra latency
+LoRA:     Parallel low-rank   → ✅ tiny params AND ⚡ no added latency
+```
 
 ### LoRA’s Trick (the smart way):  
 
@@ -35,6 +53,11 @@ It lets us adapt giant pre-trained models (LLMs, diffusion models, etc.) without
    - ✅ Zero latency, no slowdown at inference.  
 
 👉 Analogy: Instead of replacing the whole engine, LoRA adds a small turbocharger you can swap in/out.  
+| Method            | What’s Trainable? | Inference Latency | Storage per Task |
+|-------------------|-------------------|-------------------|------------------|
+| Full Fine-Tuning  | All weights (D×K) | Baseline          | Huge (full copy) |
+| Adapters          | Small add-on MLPs | Higher (extra ops)| Small            |
+| **LoRA**          | **A (D×R), B (R×K)** | **Baseline (merged)** | **Tiny (A,B only)** |
 
 ---
 
@@ -57,6 +80,11 @@ It lets us adapt giant pre-trained models (LLMs, diffusion models, etc.) without
 - 💾 Small files → easy to share or swap.  
 - ⚡ No inference latency (unlike adapters).  
 - 🎯 Accuracy ≈ full fine-tuning.  
+```
+Frozen Base Model  +  "Low-Rank Skill Pack"
+                 (A,B learned per task)
+→ Same-speed model that gained a new specialization
+```
 
 ---
 
@@ -67,8 +95,8 @@ It lets us adapt giant pre-trained models (LLMs, diffusion models, etc.) without
 
 ---
 
-## 💡 Memory Hooks  
+## 📝 Key Takeaways
 
-- **Adapters = bolt-on gadgets → extra latency.**  
-- **LoRA = hidden upgrade chip → same speed.**  
-- Think: *USB stick with custom skills for your model.*  
+1) Learn tiny low-rank matrices (A,B) instead of all weights.  
+2) Train fast, store little, and run at **original speed**.  
+3) Perfect for customizing giant models on modest hardware.
