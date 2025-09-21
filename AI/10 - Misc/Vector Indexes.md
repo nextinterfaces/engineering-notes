@@ -104,16 +104,15 @@ Real systems combine them:
 ------------------------------------------------------------------------
 
 # 🎯 Summary Cheat-Sheet
-
+```
   Index   Speed           Accuracy     Memory        Best Use
   ------- --------------- ------------ ------------- --------------------
   Flat    ❌ Slow         ✅ Perfect   🟢 Moderate   Small datasets
   HNSW    ✅ Fast         ✅ High      🔴 Higher     Most popular ANN
   IVF     ✅ Fast         ⚠️ Medium    🟢 Lower      Huge datasets
   PQ      ✅ Super fast   ⚠️ Lower     ✅ Tiny       Memory constrained
-
 ------------------------------------------------------------------------
-
+```
 # 🎨 Mental Picture
 
     Flat  = Walking every aisle in the library
