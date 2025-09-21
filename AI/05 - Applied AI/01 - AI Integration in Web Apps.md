@@ -173,6 +173,4 @@ Q3: Your chatbot slows under heavy traffic. What infra fix?
 - AI Search = intent-aware results.  
 - Chatbots = interactive experiences.  
 - Personalization = boost engagement with tailored content.  
-- Infra = API gateways, vector DBs, autoscaling.  
-
-⚡ Web engineers who learn applied AI → build smarter, modern web apps.  
+- Infra = API gateways, vector DBs, autoscaling.   
