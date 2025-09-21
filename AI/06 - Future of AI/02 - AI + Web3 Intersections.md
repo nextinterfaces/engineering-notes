@@ -111,7 +111,32 @@ Results stored on-chain for verification
 
 ---  
 
-## 8. Game Time 🎲  
+## 8. Future Trends 🔮  
+
+1. **AI-driven DAOs** 🤝  
+   - DAOs governed partly or fully by AI agents.  
+   - Agents vote, allocate funds, and enforce governance.  
+
+2. **Tokenized AI Models** 🪙  
+   - Models represented as on-chain assets.  
+   - Developers share ownership via tokens.  
+   - Example: fractional ownership of GPT-like models.  
+
+3. **Decentralized Guardrails** 🔏  
+   - Community-driven moderation for LLMs.  
+   - Smart contracts enforce **ethical filters** for AI outputs.  
+
+4. **Proof-of-AI Work** ⛓️  
+   - Consensus mechanisms where AI computations are part of validation.  
+   - E.g., miners/validators proving AI inference tasks.  
+
+5. **Cross-chain AI Services** 🌉  
+   - AI agents moving across multiple blockchains.  
+   - Oracles bridging on-chain and off-chain AI outputs.  
+
+---  
+
+## 9. Game Time 🎲  
 
 Q1: How can blockchain help fight deepfakes?  
 👉 By verifying **content provenance** on-chain.  
@@ -122,14 +147,17 @@ Q2: Which Web3 primitive lets users sell data to AI companies?
 Q3: You want an AI agent to autonomously trade crypto. What’s needed?  
 👉 Smart contracts + wallet access.  
 
+Q4: What future trend allows **shared ownership of AI models**?  
+👉 **Tokenized AI models**.  
+
 ---  
 
-## 9. Recap 🎉  
+## 10. Recap 🎉  
 
 - AI + Web3 = intelligence + trust.  
 - Use cases: data markets, provenance, AI agents on-chain, compute sharing.  
 - Pros: trust, ownership, incentives.  
 - Cons: latency, scalability, governance.  
-- Comparative table shows why **the intersection is unique**.  
+- Future: AI DAOs, tokenized models, decentralized guardrails.  
 
 ⚡ The intersection is the frontier → **AI builds intelligence, Web3 ensures trust**.  
