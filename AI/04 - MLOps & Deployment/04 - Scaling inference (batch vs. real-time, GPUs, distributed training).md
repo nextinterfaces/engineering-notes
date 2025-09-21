@@ -1,4 +1,4 @@
-# ⚡ Scaling Inference: Batch vs Real-time, GPUs, Distributed Training  
+# ⚡ Scaling Inference: Batch vs Real-time, CPUs vs GPUs vs TPUs, Distributed Training  
 
 ## 1. Why Care About Scaling Inference?  
 
@@ -36,42 +36,90 @@ Imagine opening a burger shop 🍔.
 
 ---  
 
-## 3. Accelerating with GPUs 🎮  
+## 3. CPU vs GPU vs TPU 🖥️🎮⚡  
 
-- CPUs good for small loads.  
-- GPUs excel at **parallel matrix operations** → speedups for deep nets.  
-- Frameworks: TensorRT, ONNX Runtime, Torch-TensorRT.  
+### CPU (Central Processing Unit)  
+- General-purpose processor.  
+- Few cores (4–64), optimized for sequential tasks.  
+- Great for small/medium ML models, low QPS (queries/sec).  
+
+👉 Pros:  
+- Ubiquitous, easy to deploy.  
+- Strong single-thread performance.  
+- Best for light inference (tabular ML, small models).  
+
+👉 Cons:  
+- Limited parallelism.  
+- Much slower for large matrix multiplications.  
+
+---  
+
+### GPU (Graphics Processing Unit)  
+- Thousands of small cores (CUDA cores).  
+- Designed for **massive parallelism** → perfect for matrix multiplications in deep nets.  
+
+👉 Pros:  
+- High throughput for deep learning (CNNs, Transformers).  
+- Libraries like TensorRT, cuDNN, ONNX Runtime accelerate inference.  
+- Ideal for real-time, high-volume workloads.  
+
+👉 Cons:  
+- Expensive 💸.  
+- Requires batching for efficiency.  
+- Less power-efficient than CPUs for small workloads.  
 
 ```python
-# Example: PyTorch inference on GPU
+# PyTorch GPU inference
 import torch
-model = torch.jit.load("model_traced.pt")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model.to(device)
-
+model = torch.jit.load("model.pt").to(device)
 x = torch.randn(1, 3, 224, 224).to(device)
 with torch.no_grad():
     y = model(x)
 ```  
 
-- ✅ Great for deep learning workloads.  
-- ❌ Expensive, needs batching to maximize throughput.  
+---  
+
+### TPU (Tensor Processing Unit)  
+- Custom ASIC (Application-Specific Integrated Circuit) built by Google.  
+- Designed specifically for tensor operations (matrix multiplies).  
+- Optimized for TensorFlow/JAX workloads.  
+
+👉 Pros:  
+- Extremely high throughput (petaflop scale).  
+- Great for **training & inference of huge models**.  
+- Scales seamlessly in Google Cloud TPU pods.  
+
+👉 Cons:  
+- Vendor lock-in (Google Cloud).  
+- Limited framework support (best with TensorFlow/JAX).  
+- Less flexible than GPUs for general workloads.  
 
 ---  
 
-## 4. Distributed Inference 🖧  
+## 4. Performance Comparison (High-Level)  
 
-When one machine/GPU isn’t enough:  
+| Hardware | Core Count | Strength | Best For | Weakness |
+|----------|------------|----------|----------|-----------|
+| **CPU** | 4–64 cores | Strong sequential compute | Small/medium models, tabular ML, on-device inference | Poor at massive matrix multiplications |
+| **GPU** | 1,000s of cores | Parallel matrix ops | Deep nets (CNNs, Transformers), real-time inference | Expensive, needs batching |
+| **TPU** | Matrix units (systolic arrays) | Specialized tensor math | Huge models, large-scale training/inference | Cloud-only, less flexible |  
+
+---  
+
+## 5. Distributed Inference 🖧  
+
+When one machine/GPU/TPU isn’t enough:  
 - **Horizontal scaling**: replicate model across servers.  
-- **Model parallelism**: split model across GPUs.  
-- **Data parallelism**: split data across GPUs/nodes.  
+- **Model parallelism**: split model layers across devices.  
+- **Data parallelism**: shard data across GPUs/TPUs.  
 
 ### Tools  
-- Ray Serve, TorchServe, TensorFlow Serving, NVIDIA Triton.  
-- Kubernetes for orchestration.  
+- Ray Serve, TorchServe, TensorFlow Serving, NVIDIA Triton, Vertex AI (TPUs).  
+- Kubernetes for orchestration & autoscaling.  
 
 ```python
-# Example: Ray Serve (scaling with multiple replicas)
+# Ray Serve scaling example
 from ray import serve
 
 @serve.deployment(num_replicas=3)
@@ -89,41 +137,48 @@ serve.run(Model.bind())
 
 ---  
 
-## 5. Text Diagram: Scaling Options  
+## 6. Text Diagram: Scaling Options  
 
 ```
 Batch Inference → Offline, efficient, high throughput  
 Real-time      → Online, low latency, user-facing  
-GPUs           → Speed up heavy models  
-Distributed    → Multiple nodes/GPUs for scale  
+CPU            → Cheap, general purpose, small jobs  
+GPU            → Parallel, deep learning, high throughput  
+TPU            → Specialized, cloud-scale, giant models  
+Distributed    → Multiple nodes/accelerators for massive scale  
 ```  
 
 ---  
 
-## 6. Challenges ⚠️  
+## 7. Challenges ⚠️  
 
 - **Latency vs Throughput** trade-offs.  
-- **Cost optimization**: GPUs expensive, use autoscaling.  
+- **Cost optimization**: CPUs cheap, GPUs costly, TPUs premium.  
 - **Load balancing** for real-time APIs.  
-- **Monitoring**: latency, error rates, GPU utilization.  
+- **Monitoring**: latency, error rates, utilization (CPU/GPU/TPU).  
 
 ---  
 
-## 7. Game Time 🎲  
+## 8. Game Time 🎲  
 
-Q: Your model processes **1M transactions nightly** → batch or real-time?  
-👉 Answer: **Batch inference**.  
+Q1: Your model processes **1M transactions nightly** → CPU or GPU?  
+👉 Answer: **CPU batch inference** (cheaper).  
 
-Q: Your fraud detection must decide **before approving a payment** → batch or real-time?  
-👉 Answer: **Real-time inference**.  
+Q2: Your fraud detection must respond **within 50ms per request** → CPU or GPU?  
+👉 Answer: **GPU real-time inference**.  
+
+Q3: You need to serve a **1B parameter Transformer model** at scale → GPU or TPU?  
+👉 Answer: **TPU pod (or multi-GPU cluster)**.  
 
 ---  
 
-## 8. Recap 🎉  
+## 9. Recap 🎉  
 
-- **Batch inference** = offline, high-throughput jobs.  
-- **Real-time inference** = low-latency APIs.  
-- **GPUs** = accelerate parallel workloads.  
-- **Distributed inference** = scale beyond one machine.  
+- **Batch inference** = offline, cost-effective, high throughput.  
+- **Real-time inference** = online, low-latency.  
+- **CPUs** = cheap & general-purpose, small/medium workloads.  
+- **GPUs** = parallel compute, great for deep nets.  
+- **TPUs** = custom accelerators for massive ML workloads.  
+- **Distributed inference** = scale out across devices/nodes.  
 
-⚡ Scaling inference = matching the right method to your workload & infra.  
+⚡ Choose hardware & mode based on workload, latency, and cost.  
