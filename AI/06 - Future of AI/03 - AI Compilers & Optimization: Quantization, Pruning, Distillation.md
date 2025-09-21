@@ -1,4 +1,4 @@
-# ⚙️ AI Compilers & Optimization: Quantization, Pruning, Distillation  
+# ⚙️ AI Compilers & Optimization: Quantization, Pruning, Distillation   
 
 ## 1. Why AI Compilers & Optimization?  
 
@@ -105,13 +105,18 @@ Train big model → Distill student → Prune weights → Quantize → Compile �
 
 ---  
 
-## 7. Text Diagram  
+## 7. Side-by-Side Workflow Diagram 🖼️  
 
 ```
-Optimization Axes:  
-   - Quantization → smaller numbers  
-   - Pruning      → fewer parameters  
-   - Distillation → smaller models mimic bigger ones  
+Quantization            Pruning                  Distillation
+-------------           -------------            ---------------
+FP32 Weights            Full Dense Model         Large Teacher Model
+     ↓                        ↓                          ↓
+Reduce Precision        Remove small weights      Train small Student Model
+(FP16 / INT8)           or neurons (structured)   on Teacher's outputs
+     ↓                        ↓                          ↓
+Smaller + Faster        Smaller + Faster          Smaller + Faster
+But some accuracy drop  Accuracy may drop          Accuracy mostly preserved
 ```  
 
 ---  
@@ -125,7 +130,46 @@ Optimization Axes:
 
 ---  
 
-## 9. Game Time 🎲  
+## 9. Comparison Table 🆚  
+
+| Technique       | Size Reduction 📦 | Speed Gain ⚡ | Accuracy Impact 🎯 | Notes |
+|-----------------|------------------|--------------|--------------------|-------|
+| **Quantization** | 2–4x smaller     | 2–4x faster  | Small to medium drop | Great for edge/CPU inference |
+| **Pruning**     | 2–10x smaller    | 2–5x faster  | Medium drop if aggressive | Structured pruning helps hardware efficiency |
+| **Distillation** | 2–5x smaller     | 2–3x faster  | Minimal drop (sometimes better) | Requires retraining with teacher model |  
+
+---  
+
+## 10. Case Study: DistilBERT 🧪  
+
+DistilBERT is a **distilled version of BERT**:  
+
+- Teacher = BERT (110M parameters).  
+- Student = DistilBERT (66M parameters).  
+- Training method = **knowledge distillation**.  
+
+### Key Results  
+- **40% smaller**.  
+- **60% faster inference**.  
+- **Retains ~97% of BERT’s performance** on NLP benchmarks.  
+
+### How it Worked  
+1. Train student on BERT’s soft labels (logits).  
+2. Add loss from ground-truth labels.  
+3. Use temperature scaling for smoother probabilities.  
+4. Optimize trade-off: accuracy vs efficiency.  
+
+```
+DistilBERT = Student Model  
+   ↓  
+Trained with loss = α * CE(hard labels) + β * KL(soft labels from BERT)
+```  
+
+👉 Proof that distillation can shrink models massively **without big accuracy loss**.  
+
+---  
+
+## 11. Game Time 🎲  
 
 Q1: You want to deploy a BERT model on mobile. Which techniques first?  
 👉 Quantization + Distillation.  
@@ -136,14 +180,18 @@ Q2: You need to reduce GPU memory for inference by 50%. Which technique?
 Q3: You want a small chatbot model trained from GPT-3. Which method?  
 👉 Distillation.  
 
+Q4: What technique created DistilBERT?  
+👉 **Knowledge Distillation**.  
+
 ---  
 
-## 10. Recap 🎉  
+## 12. Recap 🎉  
 
 - **Compilers** → map models to efficient hardware code.  
 - **Quantization** → lower precision, smaller + faster.  
 - **Pruning** → cut unnecessary weights.  
 - **Distillation** → small model learns from big one.  
-- Combined → deploy AI anywhere: cloud, edge, mobile.  
+- **Workflow diagram** shows side-by-side differences.  
+- **Case study (DistilBERT)** = real-world proof of distillation success.  
 
 ⚡ Optimization = making AI **practical + efficient**.  
