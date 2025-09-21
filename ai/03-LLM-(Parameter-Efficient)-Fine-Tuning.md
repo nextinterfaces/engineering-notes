@@ -60,6 +60,13 @@ Full fine-tuning = updating **all model weights** for every new task.
 - 💸 **Expensive**: Needs huge GPU clusters.  
 - 💾 **Storage nightmare**: Every task = store another copy of billions of parameters.  
 - 🧹 **Forgetting**: Model overwrites pre-trained knowledge when retrained.  
+```
+Full Fine-Tuning
+┌───────────────┐
+│   Pretrained  │   update EVERYTHING
+│   Model       │  ─────────────────► Huge cost + storage
+└───────────────┘
+```
 
 👉 Analogy: Rewriting the **entire encyclopedia** for each new subject, instead of just adding a sticky note.  
 
@@ -88,6 +95,13 @@ Instead of rewriting the entire model, you just **add small trainable parts** wh
    - Hidden layer size = **M** (tiny, e.g. 64).  
    - Formula for adapter parameters = **2MD + M + D** (way smaller than full model).  
 3. Only the adapters are trained — the **original Transformer weights stay frozen**.  
+```
+[Transformer Layer]
+      │
+      ├── Frozen Weights (unchanged)
+      │
+      └── Adapter Layers (tiny, trainable)
+```
 
 👉 Analogy: Instead of remodeling your entire house, you just add **extension plugs** where needed.  
 
