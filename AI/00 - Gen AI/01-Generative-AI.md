@@ -1,6 +1,7 @@
 # 🎨 Generative AI: A Head-First Guide  
 *"How machines learn to CREATE, not just classify."*
 
+Inspired by https://www.youtube.com/watch?v=l6QnODM66a0&list=PLTl9hO2Oobd-DuzytO9QXuB83gVUnu9Ku
 ---
 
 ## 🎯 Learning Objectives
