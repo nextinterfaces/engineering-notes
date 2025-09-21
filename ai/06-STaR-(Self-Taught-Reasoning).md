@@ -1,4 +1,4 @@
-# 🌟 Self-Taught Reasoning (Star)  
+# 🌟 Self-Taught Reasoning (STaR)  
 *"How LLMs can learn to teach themselves reasoning."*  
 
 ---
@@ -32,16 +32,16 @@ A: 6
 
 ---
 
-## 🌟 Enter Star: Self-Taught Reasoning  
+## 🌟 Enter STaR: Self-Taught Reasoning  
 
-Star = **Fine-tuning with rationales**.  
+STaR = **Fine-tuning with rationales**.  
 Instead of *only answers*, the model trains on **questions + reasoning + answers**.  
 
 👉 Like a student who doesn’t just memorize answers but learns to write full solutions.  
 
 ---
 
-## ⚙️ How Star Works  
+## ⚙️ How STaR Works  
 
 Needs:  
 - Pre-trained LLM.  
@@ -95,7 +95,7 @@ Model learns reasoning!
 ## 📊 Performance  
 
 - **Arithmetic:** Rationalization accelerates performance on multi-digit addition.  
-- **Commonsense QA:** Star ≈ GPT-3, but with a model **30× smaller**.  
+- **Commonsense QA:** STaR ≈ GPT-3, but with a model **30× smaller**.  
 
 ---
 
@@ -110,13 +110,13 @@ Model learns reasoning!
 ## 📝 Key Takeaways  
 
 1. **CoT:** Prompt with reasoning → better results.  
-2. **Star:** Fine-tune with reasoning → even better.  
+2. **STaR:** Fine-tune with reasoning → even better.  
 3. **Rationalize step:** Wrong answers become learning opportunities.  
-4. **Efficiency:** Star = GPT-3-level with much smaller models.  
+4. **Efficiency:** STaR = GPT-3-level with much smaller models.  
 5. **Limits:** Needs big enough base models + reliable rationales.  
 
 ---
 
 💡 Memory Hook:  
 CoT = “show your work.”  
-Star = “teach yourself to always show your work.”  
+STaR = “teach yourself to always show your work.”  
