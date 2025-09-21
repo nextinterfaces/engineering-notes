@@ -1,8 +1,6 @@
 # 🧠 Self-Attention in Transformers  
 *"How models stopped reading one word at a time and learned to look everywhere at once."*  
 
----
-
 Insipired by https://www.youtube.com/watch?v=QCJQG4DuHT0&list=PLTl9hO2Oobd97qfWC40gOSU8C0iu0m2l4
 
 ## 😵 The Old Days: RNNs and Their Struggles  
