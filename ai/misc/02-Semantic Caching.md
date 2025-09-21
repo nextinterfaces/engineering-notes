@@ -1,7 +1,5 @@
-# ⚡ Semantic Caching: Head First Style Training  
-*By your AI Research Field Engineer & Lector*  
+# ⚡ Semantic Caching
 
----  
 
 ## 1. Why Do We Need Semantic Caching?  
 
