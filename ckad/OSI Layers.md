@@ -63,3 +63,49 @@ MAC addresses, switches.
 ### **L1 --- Physical Layer**
 
 Raw bits over fiber, copper, WiFi.
+
+---
+
+## Quick mapping to Kubernetes
+
+- **L7 — Application**
+  - HTTP/gRPC apps in Pods, CoreDNS for cluster DNS, Ingress resources and controllers.
+  - Service mesh (e.g., Istio/Linkerd) adds L7 routing, retries, and observability.
+- **L6 — Presentation**
+  - TLS termination at Ingress Controllers; mTLS between services via a mesh.
+  - Serialization formats: JSON/Proto used by app payloads.
+- **L5 — Session**
+  - App-level sessions/WebSockets. Sticky sessions via Ingress/Service annotations when needed.
+- **L4 — Transport**
+  - TCP/UDP. Services expose ClusterIP/NodePort/LoadBalancer. kube-proxy programs iptables/IPVS.
+  - Readiness/liveness/startup probes are L4/L7 checks that drive endpoints.
+- **L3 — Network**
+  - Pod IPs and routing provided by CNI plugins (Calico, Cilium, Flannel).
+  - NetworkPolicies operate here to allow/deny Pod-to-Pod traffic.
+- **L2 — Data Link**
+  - Node NICs, bridges, and veth pairs. Some CNIs use L2/L3 overlays or eBPF.
+- **L1 — Physical**
+  - Underlay network: switches, links, wireless; outside Kubernetes’ direct control.
+
+## Protocol Data Units (PDU)
+
+- **L7:** Data (application messages)
+- **L4:** Segments (TCP) / Datagrams (UDP)
+- **L3:** Packets
+- **L2:** Frames
+- **L1:** Bits
+
+## Common ports and K8s specifics
+
+- **80/443:** HTTP/HTTPS to Services/Ingress.
+- **53/UDP,TCP:** DNS (CoreDNS service `kube-dns`).
+- **6443/TCP:** kube-apiserver.
+- **2379-2380/TCP:** etcd.
+- **10250/TCP:** kubelet.
+- **30000–32767/TCP,UDP:** NodePort range (default).
+
+
+## Mnemonics
+
+- Top-down: "Application, Presentation, Session, Transport, Network, Data Link, Physical".
+- Bottom-up: "Please Do Not Throw Sausage Pizza Away".
