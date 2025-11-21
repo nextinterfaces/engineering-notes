@@ -19,7 +19,7 @@ Client (browser)
 +--------------------------------------------------------------+
 |                  Kubernetes Nodes                            |
 |--------------------------------------------------------------|
-|  Internal Node IP: 192.168.X.X                               |
+| Internal IP: 192.168.X.X (reachable in EKS, GKE, Hetzner, VM)|
 |                                                              |
 |  NodePort exposed here:                                      |
 |      NodePort: 30080                                         |
@@ -87,5 +87,64 @@ spec:
     targetPort: 5000  # pod containerPort
     nodePort: 30080   # externally exposed NodePort
     protocol: TCP
+```
+
+### FULL NETWORK DIAGRAM
+```sql
+                                    +--------------------------------------+
+                                    |           Outside World              |
+                                    | (your laptop / browser / API client) |
+                                    +-------------------+------------------+
+                                                        |
+                                           HTTP request |
+                                      http://NODE_IP:30080
+                                                        v
+                        -------------------------------------------------------
+                        |                      Kubernetes Cluster             |
+                        |-----------------------------------------------------|
+                        |  Contains:                                           |
+                        |   - Nodes (VMs)                                      |
+                        |   - Services                                         |
+                        |   - Pods                                             |
+                        |   - CNI network                                      |
+                        -------------------------------------------------------
+                                   |                         |
+                                   |   Node receives traffic |  
+                                   v                         |
++----------------------------------------------------------------------------------+
+|                         Kubernetes Node (example-node)                           |
+|----------------------------------------------------------------------------------|
+|   External Node IP (may be public):   34.10.55.80    (optional)                  |
+|   Internal Node IP (private network): 192.168.X.X                                |
+|                                                                                |
+|   NodePort Service exposes port:                                                |
+|            NodePort: 30080                                                      |
+|                                                                                |
+|   Any traffic sent to:                                                          |
+|            192.168.X.X:30080                                                    |
+|        or  34.10.55.80:30080                                                    |
+|   is forwarded into the cluster network via kube-proxy                          |
++-----------------------------------+----------------------------------------------+
+                                        |
+                                        | forwards NodePort → Service Port
+                                        v
+                     +------------------------------------------------------+
+                     |              Service: example-service                |
+                     |------------------------------------------------------|
+                     |   ClusterIP (virtual service IP): 10.43.X.X          |
+                     |   Service Port:                   8080               |
+                     |   Type: NodePort                                   |
+                     |   Selects: app=example                               |
+                     +--------------------------+---------------------------+
+                                                |
+                                                | Load-balances to Pods
+                                                v
+                           +-------------------------------------------------+
+                           |                Pod: example-pod                |
+                           |-------------------------------------------------|
+                           |   Pod IP (CNI network):       172.17.X.X        |
+                           |   containerPort / targetPort: 5000              |
+                           |   The app is actually listening on port 5000    |
+                           +-------------------------------------------------+
 
 ```
