@@ -99,9 +99,9 @@ spec:
                                            HTTP request |
                                       http://NODE_IP:30080
                                                         v
-                        -------------------------------------------------------
-                        |                      Kubernetes Cluster             |
-                        |-----------------------------------------------------|
+                        --------------------------------------------------------
+                        |                      Kubernetes Cluster              |
+                        |------------------------------------------------------|
                         |  Contains:                                           |
                         |   - Nodes (VMs)                                      |
                         |   - Services                                         |
@@ -133,14 +133,14 @@ spec:
                      |------------------------------------------------------|
                      |   ClusterIP (virtual service IP): 10.43.X.X          |
                      |   Service Port:                   8080               |
-                     |   Type: NodePort                                   |
+                     |   Type: NodePort                                     |
                      |   Selects: app=example                               |
                      +--------------------------+---------------------------+
                                                 |
                                                 | Load-balances to Pods
                                                 v
                            +-------------------------------------------------+
-                           |                Pod: example-pod                |
+                           |                Pod: example-pod                 |
                            |-------------------------------------------------|
                            |   Pod IP (CNI network):       172.17.X.X        |
                            |   containerPort / targetPort: 5000              |
