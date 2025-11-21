@@ -115,15 +115,15 @@ spec:
 |                         Kubernetes Node (example-node)                           |
 |----------------------------------------------------------------------------------|
 |   External Node IP (may be public):   34.10.55.80    (optional)                  |
-|   Internal Node IP (private network): 192.168.X.X                                |
-|                                                                                |
-|   NodePort Service exposes port:                                                |
-|            NodePort: 30080                                                      |
-|                                                                                |
-|   Any traffic sent to:                                                          |
-|            192.168.X.X:30080                                                    |
-|        or  34.10.55.80:30080                                                    |
-|   is forwarded into the cluster network via kube-proxy                          |
+|   Internal Node IP (private network): 192.168.X.X    (reachable in EKS, GKE, VM) |
+|                                                                                  |
+|   NodePort Service exposes port:                                                 |
+|            NodePort: 30080                                                       |
+|                                                                                  |
+|   Any traffic sent to:                                                           |
+|            192.168.X.X:30080                                                     |
+|        or  34.10.55.80:30080                                                     |
+|   is forwarded into the cluster network via kube-proxy                           |
 +-----------------------------------+----------------------------------------------+
                                         |
                                         | forwards NodePort → Service Port
