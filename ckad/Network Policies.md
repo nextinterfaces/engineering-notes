@@ -109,7 +109,7 @@ spec:
         - podSelector:
             matchLabels:
               app: database-pod-1   # Allowed Pod
-        - namespaceSelector:
+        - namespaceSelector: 
             matchLabels:
               env: prod-databases    # Allowed Namespace
         - ipBlock:
