@@ -127,6 +127,14 @@ const Dashboard = lazy(() => import('./Dashboard'));
 - Prioritize accessibility (keyboard, semantics)
 
 
+
+## 5. Use Micro-frontends
+- Independent deployments
+- Team autonomy at scale
+- Technology flexibility
+- Smaller scope
+- Fail independently using feature flags
+
 ### What typically makes React apps slow?
 
 - Blocking the Main ThreadProblem: Heavy synchronous work freezes UI
