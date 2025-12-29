@@ -135,6 +135,18 @@ const Dashboard = lazy(() => import('./Dashboard'));
 - Smaller scope
 - Fail independently using feature flags
 
+## 6. Use Generics <T>
+- Type safety
+- DRY
+- Contract enforcement
+- 
+```typescript
+function someFunc<T>(arg: T): T {}
+// Usage
+someFunc("myString")
+someFunc(100)
+```
+
 ### What typically makes React apps slow?
 
 - Blocking the Main ThreadProblem: Heavy synchronous work freezes UI
